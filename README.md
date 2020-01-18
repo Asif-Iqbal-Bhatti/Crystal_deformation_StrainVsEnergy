@@ -1,4 +1,4 @@
-# Crystal_deformation_-strain-
+# Generate Langragian strain crystals for VASP calculation
 Generating input files for VASP. Here it uses the lagrangian strain to strain the system with users specified deformation constant. This value should be in the harmonic
 approximation otherwise it will fail.
 
