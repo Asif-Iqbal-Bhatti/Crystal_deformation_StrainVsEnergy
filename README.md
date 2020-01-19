@@ -1,10 +1,10 @@
 # Generate crystal deformation with Langragian strain for VASP calculations
 To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail.
 
-NB: This code is the modification of the script provided with theexciting code. All rights belongs to the original author,
+NB: This code is the modification of the script provided with the exciting code. All rights belongs to the original author,
 if there is an error in the code or bug please contact the exciting team.
 
-**This script run with python 3 or higher version.**
+**This script compiles with python 3 or higher version.**
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 ![pypi](https://img.shields.io/pypi/v/pybadges.svg)
 ![versions](https://img.shields.io/pypi/pyversions/pybadges.svg)
