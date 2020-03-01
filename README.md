@@ -1,4 +1,8 @@
-# Generate crystal deformation with Langragian strain for VASP calculations
+# Crystal structure deformation using Langragian strain for VASP input files
+(**) ENERGY Vs STRAIN APPROACH
+
+STRESS Vs STRAIN Appraoch  ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) [L.D. Landau, E.M. Lifszyc, Theory of elasticity, Elsevier (1986) ; ISBN: 075062633X, 9780750626330]
+
 To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail.
 
 NB: This code is the modification of the script provided with the exciting code. All rights belongs to the original author,
