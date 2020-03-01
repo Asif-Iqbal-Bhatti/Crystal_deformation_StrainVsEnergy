@@ -1,9 +1,7 @@
 # Crystal structure deformation using Langragian strain for VASP input files
 (**) ENERGY Vs STRAIN APPROACH
 
-STRESS Vs STRAIN Appraoch  ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) [L.D. Landau, E.M. Lifszyc, Theory of elasticity, Elsevier (1986) ; ISBN: 075062633X, 9780750626330]
-
-To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail.
+To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail. Large deformation leads to phase transitions.
 
 NB: This code is the modification of the script provided with the exciting code. All rights belongs to the original author,
 if there is an error in the code or bug please contact the exciting team.
@@ -21,3 +19,9 @@ The literature behind can be found at the exciting website.
 
 ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
 ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
+
+Another interesting is:
+
+STRESS Vs STRAIN Appraoch  
+ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) 
+[L.D. Landau, E.M. Lifszyc, Theory of elasticity, Elsevier (1986) ; ISBN: 075062633X, 9780750626330]
