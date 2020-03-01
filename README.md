@@ -12,10 +12,11 @@ To generate input files for VASP. It uses the lagrangian strain to strain the sy
 NB: This code is the modification of the script provided with the exciting code. All rights belongs to the original author,
 if there is an error in the code or bug please contact the exciting team.
 
+```
 I have modified the script to read CONTCAR optimized file (already minimized with IBRION=2, ISIF=3) and then print out the deformed POSCAR files with various strain.
 Just follow the recipe on the screen and it will guide you to the rest of the process. For more information please visit exciting website (Elastic code).
 The literature behind can be found at the exciting website.
-
+```
 
 ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
 ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
