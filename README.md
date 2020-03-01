@@ -18,11 +18,12 @@ Just follow the recipe on the screen and it will guide you to the rest of the pr
 The literature behind can be found at the exciting website.
 ```
 
-ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
-ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
+[1] ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
 
-Another interesting is:
+[2] ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
 
-STRESS Vs STRAIN Appraoch  
-ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) 
+**Another interesting is: STRESS Vs STRAIN Appraoch  
+
+[3] ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) 
+
 [L.D. Landau, E.M. Lifszyc, Theory of elasticity, Elsevier (1986) ; ISBN: 075062633X, 9780750626330]
