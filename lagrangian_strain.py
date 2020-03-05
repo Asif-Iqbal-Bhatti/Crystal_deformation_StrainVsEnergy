@@ -8,8 +8,7 @@ import subprocess
 import os.path
 import shutil
 import numpy, scipy
-import math
-import sys, os
+import math, sys, os
 from colorama import Fore, Back, Style, init
 init(autoreset=True)
 
