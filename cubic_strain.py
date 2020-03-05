@@ -55,8 +55,8 @@ if (0 > deformation_code or deformation_code > 3):
     sys.exit("ERROR: Deformation code is out of range [0-3]!\n")
 
 if (deformation_code == 0 ): dc='EEE000'
-if (deformation_code == 1 ): dc='EEE000'
-if (deformation_code == 2 ): dc='00E00E'
+if (deformation_code == 1 ): dc='EeE000'
+if (deformation_code == 2 ): dc='00E002'
 
 #-------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ eta_step=2*maximum_strain/delta
 
 #-------------------------------------------------------------------------------
 t=1; tmp=-tmp; Vo=1
-print ("{:12s} {:12.8s} {:14.8s} {:14.8s}".format("", "Vol_cell", "Vol_D'", "(V-Vo)/V" ))
+print ("{:12s} {:12.8s} {:14.8s} {:14.8s}".format("", "Vol_cell", "Vol_D'", "V/V_D'" ))
 
 for i in range(0,strain_points):
 	eta=i*eta_step-maximum_strain*convert
@@ -136,9 +136,10 @@ for i in range(0,strain_points):
 		if  (dc[j:j+1] == 'E' ): ev=ep
 		elif(dc[j:j+1] == 'e' ): ev=em
 		elif(dc[j:j+1] == '0' ): ev=0
+		elif(dc[j:j+1] == '2' ): ev=2*ep
 		else: print ("==> ", dc); sys.exit("ERROR: deformation code not allowed!") 
 		e.append(ev) 
-		#print (e)
+	#print (e)
 #------------------------------------ DEFORMATION STRAIN MATRIX ---------------
 	#     |e[0]    e[5]/2  e[4]/2|
 	# D = |e[5]/2  e[1]    e[3]/2|
@@ -146,24 +147,30 @@ for i in range(0,strain_points):
 	
 	# BULK 9B = 3C11 + 6C12
 	if (deformation_code == 0): 
-		eta_matrix=np.matrix( [[ e[0], e[5], e[4]], [ e[5], e[1], e[3]],[ e[4], e[3], e[2]]] )
+		eta_matrix=np.matrix( [[ e[0],  e[5]/2, e[4]/2], 
+													[ e[5]/2, e[1], e[3]/2], 
+													[ e[4]/2, e[3]/2, e[2]]] )
 		
 	# 2*[C11 - C12]
 	if (deformation_code == 1): # 
-		eta_matrix=np.matrix( [[ e[0], e[5], e[4]],[ e[5],-e[1], e[3]], [ e[4], e[3], 1/(1-e[2]**2) -1 ]] )
+		eta_matrix=np.matrix( [[ e[0],  e[5]/2, e[4]/2],
+													[ e[5]/2, e[1], e[3]/2], 
+													[ e[4]/2, e[3]/2, 1/(1-e[2]**2) -1 ]] )
 	
 	# Here off diagonal terms are e/2 that is why we have 2*C44 otherwise we would have 4*C44
 	if (deformation_code == 2): 
-		eta_matrix=np.matrix( [[ e[0], e[5], e[4]],[ e[5], e[1], e[3]], [ e[4], e[3], 1/(1-e[2]**2) -1 ]] )
+		eta_matrix=np.matrix( [[ e[0],  e[5]/2, e[4]/2],
+													[ e[5]/2, e[1], e[3]/2], 
+													[ e[4]/2, e[3]/2, 1/(1-e[2]**2) -1 ]] )
 		
 	one_matrix=np.identity(3)
 
 #----------------------------------------------------------------------------
-	norma=1.0; inorma=0 ; eps_matrix = eta_matrix
+	norma=1.0; inorma=0 ; eps_matrix = eta_matrix; #print(eta_matrix)
 	if (linalg.norm(eta_matrix) > 0.7):sys.exit("ERROR: too large deformation!")
 	
 	while ( norma > 1.e-10 ):
-		x=eta_matrix-0.5*dot(eps_matrix,eps_matrix)
+		x=eta_matrix - 0.5 * dot(eps_matrix,eps_matrix)
 		norma=linalg.norm(x-eps_matrix) 
 		eps_matrix=x
 		inorma=inorma+1			
@@ -192,7 +199,7 @@ for i in range(0,strain_points):
 	if (tmp == 0): # reference volume Vo
 		Vo = abs(V)
 		
-	print ("{:2d}({:2d}) => {:10.6f} {:10.6f} {:14.6f}".format(t, tmp, abs(V), abs(V_def), (V-Vo)/V ) ) 
+	print ("{:2d}({:2d}) => {:10.6f} {:10.6f} {:14.6f}".format(t, tmp, abs(V), abs(V_def), V/V_def ) ) 
 	#aa = np.linalg.det( (np.dot(axis_matrix,def_matrix) ) )
 	#print(np.matmul( def_matrix,axis_matrix ) )
 	#print ("{:8.6f}".format(aa) )
