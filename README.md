@@ -5,7 +5,7 @@
 ![versions](https://img.shields.io/pypi/pyversions/pybadges.svg)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
-__ENERGY Vs STRAIN APPROACH
+ENERGY Vs STRAIN APPROACH
 
 To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail. Large deformation leads to phase transitions.
 
@@ -16,6 +16,12 @@ if there is an error in the code or bug please contact the exciting team.
 I have modified the script to read CONTCAR optimized file (already minimized with IBRION=2, ISIF=3) and then print out the deformed POSCAR files with various strain.
 Just follow the recipe on the screen and it will guide you to the rest of the process. For more information please visit exciting website (Elastic code).
 The literature behind can be found at the exciting website.
+```
+
+```
+**Deformation 2:
+Cubic_strain.py script uses another deformation matrix technique. Please note it only pertians to 
+cubic system. It can be extended to include other crystal deformation matrix.
 ```
 
 [1] ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
