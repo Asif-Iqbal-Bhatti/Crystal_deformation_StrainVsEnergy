@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 #_______________________________________________________________________________
 from   lxml  import etree
-from   sys   import stdin
 from   numpy import *
 import subprocess, os, sys
 import os.path, shutil
@@ -10,10 +9,10 @@ import math, ase
 #_______________________________________________________________________________
 CRED = '\033[91m';CEND = '\033[0m'
 CYEL = '\033[33m'; CEND = '\033[0m'
-CPIN = '\033[44m';
+CPIN = '\033[46m';
 
 def cubic_strains():
-	#os.system('ase -T convert -i vasp CONTCAR -o exciting -f input.xml')
+	os.system('ase -T convert -i vasp CONTCAR -o exciting -f input.xml')
 	if (str(os.path.exists('input.xml'))=='False'): 
 			sys.exit("ERROR: Input file input.xml not found!\n")
 	
@@ -222,8 +221,11 @@ def cubic_strains():
 																							xml_declaration=False,
 																							encoding='UTF-8'))
 		output_obj.close()	
-		os.system('ase -T convert -i exciting -f input-'+str(t).zfill(2)+'.xml -o vasp POSCAR_'+str(t).zfill(2))
-		#subprocess.call(["ase", "-T", "convert", "-i", "exciting", "-f","input-"t".xml", "-o", "vasp", POSCAR_0t])
+		#os.system('ase -T convert -i exciting -f input-'+str(t).zfill(2)+'.xml -o vasp POSCAR_'+str(t).zfill(2))
+		# ase -T convert -i vasp POSCAR -f -o vasp poscar --write-args direct=True vasp5=True
+		subprocess.call(["ase", "-T", "convert", "-i", "exciting", 
+		"-f","input-"+str(t).zfill(2)+".xml", "-o", "vasp", "POSCAR_"+str(t).zfill(2), 
+		"--write-args", "direct=True" ])
 		t+=1; tmp +=1
 	#-------------------------------------------------------------------------------
 	
