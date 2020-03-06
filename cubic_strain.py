@@ -12,7 +12,7 @@ CYEL = '\033[33m'; CEND = '\033[0m'
 CPIN = '\033[46m';
 
 def cubic_strains():
-	os.system('ase -T convert -i vasp CONTCAR -o exciting -f input.xml')
+	#os.system('ase -T convert -i vasp CONTCAR -o exciting -f input.xml')
 	if (str(os.path.exists('input.xml'))=='False'): 
 			sys.exit("ERROR: Input file input.xml not found!\n")
 	
@@ -87,7 +87,7 @@ def cubic_strains():
 	axis_matrix = np.array(xml_basevect) 
 	determinant = np.linalg.det(axis_matrix)
 	volume = abs(determinant * ref_scale**3 * xml_stretch[0]*xml_stretch[1]*xml_stretch[2])
-	
+	Vo = volume
 	work_directory = 'workdir'
 	if (len(sys.argv) > 1): work_directory = sys.argv[1]
 	if (os.path.exists(work_directory)): shutil.rmtree(work_directory)
@@ -114,8 +114,8 @@ def cubic_strains():
 	eta_step=2*maximum_strain/delta
 	
 	#-------------------------------------------------------------------------------
-	t = 1; tmp=-tmp; Vo=1
-	print ("{:12s} {:12.8s} {:14.8s} {:14.8s}".format("", "Vol_cell", "Vol_D'", "V/V_D'" ))
+	t = 1; tmp=-tmp;
+	print ("{:12s} {:11.8s} {:14.8s} {:14.8s}".format("", "Vol_cell", "Vol_D'", "V/Vo(%)" ))
 	
 	for i in range(0,strain_points):
 		eta=i*eta_step-maximum_strain*convert
@@ -197,10 +197,9 @@ def cubic_strains():
 		#l2 = math.degrees(math.acos(np.dot(new_axis_matrix[1],np.transpose(new_axis_matrix[2]))/(n2*n3)))
 		#l3 = math.degrees(math.acos(np.dot(new_axis_matrix[2],np.transpose(new_axis_matrix[0]))/(n3*n1)))
 		#print(l1,l2,l3)
-		if (tmp == 0): # reference volume Vo
-			Vo = abs(V)
 			
-		print ("{:02d}({:2d}) => {:10.6f} {:10.6f} {:14.6f}".format(t, tmp, abs(V), abs(V_def), V/V_def ) ) 
+		print ("{:02d}({:2d}) => {:10.6f} {:10.6f} {:14.2f}" \
+		.format(t, tmp, abs(V), abs(V_def), 100*(V/Vo) ) ) 
 		#aa = np.linalg.det( (np.dot(axis_matrix,def_matrix) ) )
 		#print(np.matmul( def_matrix,axis_matrix ) )
 		#print ("{:8.6f}".format(aa) )
