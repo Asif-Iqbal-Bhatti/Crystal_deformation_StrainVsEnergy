@@ -32,7 +32,7 @@ cubic system. It can be extended to include other crystal deformation matrix.
 
 [2] ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
 
-**Another interesting is: STRESS Vs STRAIN Appraoch  
+**Another interesting is: STRESS Vs STRAIN Appraoch**
 
 [3] ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) 
 
