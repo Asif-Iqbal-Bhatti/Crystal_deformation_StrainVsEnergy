@@ -18,8 +18,11 @@ if there is an error in the code or bug please contact the exciting team.
 I have modified the script to read CONTCAR optimized file (already minimized with IBRION=2, ISIF=3) 
 and then print out the deformed POSCAR files with various strain.
 Just follow the recipe on the screen and it will guide you to the rest of the process. 
-For more information please visit exciting website (Elastic code).
-The literature behind can be found at the exciting website.
+For more information please visit exciting website (Elastic code). The literature behind can be found at the exciting website.
+	print ("                        |η[0]    η[5]/2  η[4]/2| ")
+	print ("                    η = |η[5]/2  η[1]    η[3]/2| ")
+	print ("                        |η[4]/2  η[3]/2  η[2]  | ")  
+	print ("                               D' = I + η") 
 ```
 
 ```
@@ -32,7 +35,7 @@ cubic system. It can be extended to include other crystal deformation matrix.
 
 [2] ref: [materialsproject](https://wiki.materialsproject.org/Elasticity_calculations)
 
-**Another interesting is: STRESS Vs STRAIN Appraoch**
+**Another interesting appraoch is: STRESS Vs STRAIN **
 
 [3] ref: [ELASTIC](https://elastic.readthedocs.io/en/stable/index.html) 
 
