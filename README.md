@@ -11,7 +11,7 @@ the details on the screen.
 To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail. Large deformation leads to phase transitions.
 
 NB: This code is the modification of the script provided with the exciting code. All rights belongs to the original author,
-if there is an error in the code or bug please contact the exciting team.
+if there is an error in the code or bug please contact the exciting team or me. Two approaches differes in the way deformation atrix is defined:
 
 ```
 **Deformation 1:
@@ -19,16 +19,19 @@ I have modified the script to read CONTCAR optimized file (already minimized wit
 and then print out the deformed POSCAR files with various strain.
 Just follow the recipe on the screen and it will guide you to the rest of the process. 
 For more information please visit exciting website (Elastic code). The literature behind can be found at the exciting website.
-	print ("                        |η[0]    η[5]/2  η[4]/2| ")
-	print ("                    η = |η[5]/2  η[1]    η[3]/2| ")
-	print ("                        |η[4]/2  η[3]/2  η[2]  | ")  
-	print ("                               D' = I + η") 
+	                                        |η[0]    η[5]/2  η[4]/2|
+	                                    η = |η[5]/2  η[1]    η[3]/2|
+	                                        |η[4]/2  η[3]/2  η[2]  |  
+	                                               D' = I + η") 
 ```
 
 ```
 **Deformation 2:
 Cubic_strain.py script uses another deformation matrix technique. Please note it only pertians to 
 cubic system. It can be extended to include other crystal deformation matrix.
+	0 => (η, η,           η,0,0,0) | volumetric strain [3C11+6C12=9B0]
+	1 => (η,-η,1/1-η**2 - 1,0,0,0) | volume-conserving orthorhombic distortion 2[C11-C12]
+	2 => (0, 0,1/1-η**2 - 1,0,0,2η)| volume-conserving monoclinic distortion [2C44]
 ```
 
 [1] ref: [exciting](http://exciting-code.org/nitrogen-energy-vs-strain-calculations)
