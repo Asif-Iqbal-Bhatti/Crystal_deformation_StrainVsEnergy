@@ -224,7 +224,8 @@ def cubic_strains():
 		# ase -T convert -i vasp POSCAR -f -o vasp poscar --write-args direct=True vasp5=True
 		subprocess.call(["ase", "-T", "convert", "-i", "exciting", 
 		"-f","input-"+str(t).zfill(2)+".xml", "-o", "vasp", "POSCAR_"+str(t).zfill(2), 
-		"--write-args", "direct=True" ])
+		"--write-args", "direct=True", "vasp5=True" ])
+		# ase -T convert -i vasp POSCAR -f -o vasp poscar --write-args direct=True vasp5=True
 		t+=1; tmp +=1
 	#-------------------------------------------------------------------------------
 	
