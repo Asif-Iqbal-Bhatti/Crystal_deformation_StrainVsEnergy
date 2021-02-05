@@ -5,8 +5,8 @@
 ![versions](https://img.shields.io/pypi/pyversions/pybadges.svg)
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](http://perso.crans.org/besson/LICENSE.html)
 
-ENERGY Vs STRAIN APPROACH: Two scripts are provided for different deformation scheme. Please read the documentation or 
-the details on the screen.
+ENERGY Vs STRAIN APPROACH: Two scripts are provided for different deformation schemes. 
+Please read the documentation as well as the details on the screen.
 
 To generate input files for VASP. It uses the lagrangian strain to strain the system with user specified deformation constant. This value should be in the harmonic regime otherwise this approximation will fail. Large deformation leads to phase transitions.
 
