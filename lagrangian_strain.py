@@ -12,17 +12,17 @@ from colorama import Fore, Back, Style, init
 init(autoreset=True)
 #_______________________________________________________________________________
 CRED = '\033[91m';CEND = '\033[0m'
-
+############### BE CAREFUL, everything should be in atomic units ###############
 def Elastic_strain():
 	print ('\n{:_^80s}'.format("Documentation"))
 	print ("__| {:10s}:: {:40s}".format("Author","Asif Iqbal"))
-	print ("__| {:10s}:: {:40s}".format("DATED","06/03/2020"))
+	print ("__| {:10s}:: {:40s}".format("DATED","10/02/2021"))
 	print ("__| {:10s}:: {:40s}".format("USAGE","python3 sys.argv[0] <directory_name>"))	
 	print (CRED+"__| [Please visit] http://exciting-code.org/nitrogen-energy-vs-strain-calculations" + CEND)
 	print (CRED+"__| \u03B7  = \u03B5 + 1/2*\u03B5**2 :: Deformation scheme" + CEND)
 	print (CRED+"__| r' = (I + \u03B5) * r :: Original to new coordinates axis" + CEND)
-	print (CRED+"__| This script doesn't generae deformation based on Crystal symmetry rather" + CEND)
-	print (CRED+"__| you can specify which deformation you want to investigate." + CEND)
+	print (CRED+"__| This script doesn't generate deformation based on Crystal symmetry rather" + CEND)
+	print (CRED+"__| Specify which deformation you want to investigate." + CEND)
 	print (CRED+"__| Deformation scheme uses Voigt notation." + CEND)
 	print ("                        |η[0]    η[5]/2  η[4]/2| ")
 	print ("                    η = |η[5]/2  η[1]    η[3]/2| ")
@@ -89,7 +89,7 @@ def Elastic_strain():
 	line1 = file1.readlines()		
 	file1.close()
 	for i in line1:
-		if ("Direct" or "direct" or "d" or "D") in i:
+		if ("Direct" or "direct" or "d" or "D" or "C" or "Cartesian" or "cartesian") in i:
 			PP=line1.index(i)
 	#-------------------------------------------------------------------------------
 	
@@ -100,9 +100,9 @@ def Elastic_strain():
 	Latvec1 	= input_obj.readline()
 	Latvec2 	= input_obj.readline()            
 	Latvec3 	= input_obj.readline()            
-	elementtype	= input_obj.readline().split()
-	if (str.isdigit(elementtype[0])):
-		sys.exit("VASP 4.X POSCAR detected. Please add the atom types")
+	elementtype	= input_obj.readline()
+	#if (str.isdigit(elementtype[0])):
+	#	sys.exit("VASP 4.X POSCAR detected. Please add the atom types")
 	atom_number = input_obj.readline()
 	Coordtype	= input_obj.readline()
 	nat 		= atom_number.split()
@@ -123,7 +123,7 @@ def Elastic_strain():
 	#print ("{}".format(xml_basevect),end="\n" )
 	axis_matrix = np.array(xml_basevect) 
 	determinant = np.linalg.det(axis_matrix)
-	volume = np.abs(determinant*scale**3)
+	volume = np.abs(determinant*scale**3) ### The volume is in Angstrom^3
 	print("Equilibrium volume of cell:: {} ".format(volume) )
 	#-------------------------------------------------------------------------------
 	work_directory = 'workdir'
@@ -136,7 +136,7 @@ def Elastic_strain():
 	
 	output_info.write("\nMaximum Lagrangian strain       = {}".format( maximum_strain ))
 	output_info.write("\nNumber of strain values         = {}".format(strain_points))
-	output_info.write("\nVolume of equilibrium unit cell = {} [A]^3".format(volume))
+	output_info.write("\nVolume of equilibrium unit cell = {} [a.u]^3".format(volume*6.74833))
 	output_info.write("\nDeformation code                = {}".format(deformation_code))
 	output_info.write("\nDeformation label               = {}".format(dc, "\n"))
 	
@@ -200,6 +200,7 @@ def Elastic_strain():
 		def_matrix=one_matrix+eps_matrix	
 		new_axis_matrix=np.transpose(np.dot(def_matrix,np.transpose(axis_matrix)))
 		nam=np.mat( new_axis_matrix, dtype=float32  )
+		
 		V = np.linalg.det(new_axis_matrix)
 		V_def = np.linalg.det(def_matrix)
 		print ("{:02d}({:2d}) => {:10.6f} {:10.6f} {:14.6f}".format(t, tmp, abs(V), abs(V_def), V/V_def ) ) 
@@ -217,12 +218,8 @@ def Elastic_strain():
 		for j in range(3):
 			output_obj.write("{:22.16f} {:22.16f} {:22.16f}\n".format( (nam[j,0]), (nam[j,1]), (nam[j,2]) )  ) 
 			
-		for j in elementtype:
-			output_obj.write("\t" +  j)
-		output_obj.write("\n" )
-		
-		for j in atom_number:
-			output_obj.write( "{}".format(j) )	
+		output_obj.write("{}".format( elementtype) )
+		output_obj.write("{}".format( atom_number) )	
 	
 		for i in range(len(line1)-PP):
 			output_obj.write(line1[PP+i] )	
